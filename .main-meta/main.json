@@ -3,11 +3,11 @@
     "category": "com.microchip.ide.project",
     "content": {
         "metaDataVersion": "1.3.0",
-        "name": "com.microchip.mcu8.mplabx.project.pic16f18076-read-write-external-memory",
+        "name": "com.microchip.mcu8.mplabx.project.pic16f18076-rw-external-memory-mplab-mcc",
         "version": " ",
         "displayName": "",
-        "projectName": "pic16f18076-read-write-external-memory",
-        "shortDescription": "Example demonstrating how to do basic read and write function to external EEPROM and Flash memory using the MSSP driver in MCC.",
+        "projectName": "pic16f18076-rw-external-memory-mplab-mcc",
+        "shortDescription": "Example demonstrating how to do basic read and writes to external memory using the MSSP driver in MCC.",
         "ide": {
             "name": "MPLAB X",
             "semverRange": ">=6.0.5"
@@ -36,7 +36,7 @@
                 "versionRange": "*"
             }
         },
-        "author": "Shaima Husain",
+        "author": "Microchip",
         "peripherals": [],
         "keywords": [],
         "additionalData": {

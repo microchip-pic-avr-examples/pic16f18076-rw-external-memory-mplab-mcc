@@ -16,8 +16,8 @@ pipeline {
 	
 	environment {
 		GITHUB_OWNER = 'microchip-pic-avr-examples'	
-		GITHUB_URL ='https://github.com/microchip-pic-avr-examples/pic16f18076-read-write-external-memory'
-		BITBUCKET_URL = 'https://bitbucket.microchip.com/scm/ebe/pic16f18076-read-write-external-memory.git'
+		GITHUB_URL ='https://github.com/microchip-pic-avr-examples/pic16f18076-rw-external-memory-mplab-mcc'
+		BITBUCKET_URL = 'https://bitbucket.microchip.com/scm/ebe/pic16f18076-rw-external-memory-mplab-mcc.git'
 		SEMVER_REGEX = '^(0|[1-9]\\d*)+\\.(0|[1-9]\\d*)+\\.(0|[1-9]\\d*)+$'
 		ARTIFACTORY_SERVER = 'https://artifacts.microchip.com:7999/artifactory'
 	}	
