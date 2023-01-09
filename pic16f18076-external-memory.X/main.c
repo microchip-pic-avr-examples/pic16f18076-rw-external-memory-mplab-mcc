@@ -33,7 +33,7 @@
 #include "mcc_generated_files/system/system.h"
 #include "eeprom.h"
 
-//#define DEBUG 0b1 //If DEBUG == 0b1 Debugging is enabled and actions will be output in UART (Baud 9600)
+//#define DEBUG 0b1 //If DEBUG == 0b1 Debugging is enabled and actions will be output in UART (Baud rate: 115200)
 
 void writeReadByteTest(uint24_t startingAddress);
 void writeReadBlockTest(uint24_t startingAddress);

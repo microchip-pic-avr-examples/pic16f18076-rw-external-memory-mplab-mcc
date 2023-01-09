@@ -18,7 +18,6 @@ void eepromWriteEnable(void)
     #if DEBUG == 0b1
         printf("Sent WREN\r\n");
     #endif
-    //__delay_ms(300);
     while(!(readStatusRegister() & 0x0002))
     {
         __delay_ms(1);
@@ -29,7 +28,6 @@ void eepromWriteEnable(void)
     #if DEBUG == 0b1
         printf("WEL bit set\r\n");
     #endif 
-    //CS1_SetHigh();
     return;
 }
 
@@ -118,7 +116,6 @@ void eepromWriteBlock (uint24_t address, uint8_t *block,int blockSize)
         return;
     }
     uint8_t addressBlock[4];
-    //int _blockSize = (int)blockSize + 4; //new block to account for Write OPCODE and Address
     addressBlock[0] = WRITE_OPCODE;
     addressBlock[1] = address >> 16;
     addressBlock[2] = address >> 8;
