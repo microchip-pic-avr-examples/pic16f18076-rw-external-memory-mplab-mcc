@@ -26,7 +26,7 @@ This example will walk the user through how to read and write both a single byte
      - [PIC16F18076 Curiosity Nano (EV53Z50A)](https://www.microchip.com/en-us/development-tool/EV53Z50A?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
      - [Curiosity Nano Base for Click boards™](https://www.microchip.com/en-us/development-tool/AC164162?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
      - [EEPROM 7 Click board™](https://www.mikroe.com/eeprom-7-click)
-     - Logic Analyzer such as Salae Logic 8™ or similar (Optional but highly Recommended)
+     - Logic Analyzer such as Salae Logic 8™ or similar (Optional, but highly recommended for debugging)
 
 ## Setup
 
@@ -36,31 +36,41 @@ The PIC16F18076 curiosity nano development board is connected to the curiosity n
 ### MPLAB Code Configurator Setup
 
 ### Configuration Bits
-[![MCHP](images/config_bits.png)]
+![Configuration Bits](images/config_bits.png)
 Set External Oscillator Selection bits to "Oscillator Not Enabled" and "Reset Oscillator Selection bits" to "HFINTOSC (32 MHz)".
 
 ### Clock Control
-TODO: Clock Control Screenshot
+![Clock Control](images/clock_control.png)
 Set the "Current Oscillator Source Select" to "HFINTOSC_32MHz" and the "HF Internal Clock" to "32_MHz".
 
 ### Pins
 Configure Pins to the table below:
-TODO: PIN Table
-TODO: Screenshot of Pin Grid View
+
+Module | Function | Pin
+--- | --- | ---
+EUSART2 | RX2 | RB5
+EUSART2 | TX2 | RB4
+MSSP1 | SCK1 | RB2
+MSSP1 | SDI1 | RB1
+MSSP1 | SDO1 | RB0
+Pins | GPIO (output) | RB3/RD3/RD7
+
+![Pin Grid View](images/pin_grid_view.png)
 In the "Pins" menu the user should rename pins RB3, RD3, and RD7 to "CS1", "HLD", and "WP" respectively for the function pin names to match the function of the corresponding pins. 
-TODO: Screenshot of Pins Menu
+![Pins](images/pins.png)
 IMPORTANT NOTE: The user should also disable the Slew Rate for pins SPI Pins: SCK1, SDI1, SDO1 (RB2, RB1, RB0 respectively). Leaving the Slew Rate limit active on the MSSP SPI pins can cause issues with higher MSSP clock frequencies.
 
 ### SPI MSSP1
-TODO: MSSP1 Screenshot
+![MSSP SPI](images/mssp_spi.png)
 The MSSP SPI should be configured to "Host Mode" in "SPI Mode" should be set to "SPI Mode 0", with the input data sampled in the middle. The "Clock Source Selection" should be set to one of the "FOSC" setting, this example uses "FOSC/4" however "FOSC/16" and "FOSC/64" will work too.
 
 ### UART2
-TODO: UART2 Screenshot
+![UART](images/uart.png)
 The user may set whatever baud rate they choose. A baud rate of 115200 will be used for this example.
 Note: "Redirect Printf to UART" should be enabled for debugging and displaying test results for this demo, however is not necessary if the user only needs to write and read data to the external EEPROM.
 
 ### Application Code
+
 Note: For simplicity and readability, the EEPROM OPCODES are defined as shown below and will be identified by their defined names throughout the code. Additionally all printf debug statements have been removed from the code snippets displayed here.
 
 ```C
@@ -128,7 +138,9 @@ void eepromWriteByte (uint24_t address, uint8_t data)
     return; 
 }
 ```
-TODO
+![MCHP](images/WriteDiagram.png)
+
+The eepromWriteByte() function takes the desired address and data from the user and writes that data to that address. This function starts by internally calling eepromWriteEnable() at the beginning. Then it fills an array with the WRITE_OPCODE, the EEPROM address, and finally the desired byte of data. The SPI1_BufferExchange() is then used to transfer the data, and lastly readStatusRegister is used to check for the write command's completion.
 
 #### eepromWriteBlock()
 ```C
@@ -158,7 +170,7 @@ void eepromWriteBlock (uint24_t address, uint8_t *block,int blockSize)
     return; 
 }
 ```
-TODO
+ The eepromWriteBlock() function follows the same principle as eepromWriteByte(), however it writes multiple bytes. The user should be aware this EEPROM segments its memory into 256-byte pages, and a block of data larger than a page will not be written properly. When a block write command reaches the end of a page the address will wrap around to the beginning of a page, so any data written past 256 bytes in a single block write will overwrite the data written at the beginning of that write. If the user desires to send more than 256-bytes at once they should split the data into smaller blocks and use multiple write commands. 
 
 #### eepromReadByte()
 ```C
@@ -179,7 +191,7 @@ uint8_t eepromReadByte (uint24_t address)
     return data;
 }
 ```
-TODO
+The eepromReadByte() function fills an array with the READ_OPCODE and specified address then uses SPI1_BufferExchange() to read the data located at the specified address on the external EEPROM.
 
 #### eepromReadBlock()
 ```C
@@ -198,7 +210,7 @@ void eepromReadBlock(uint24_t startingAddress, uint8_t *block, int blockSize)
     return;
 }
 ```
-TODO
+The eepromReadBlock() function functions just like eepromReadByte(), however reads a specified number of bytes and then stores the returned values at the address for variable "block". Unlike eepromWriteBlock(), a single block read command can continue past the end of a page and read the entire EEPROM if desired. The function will start at the address specified by "startingAddress" and increment upwards with each subsequent clock cycle.
 
 #### writeReadByteTest()
 ```C
@@ -226,7 +238,7 @@ void writeReadByteTest(uint24_t startingAddress)
         }
 }
 ```
-TODO
+This function tests reading and writing three subsequent bytes using the eepromWriteyte() and eepromReadByte() functions and compares the data written and read. The result of the test is then printed.
 
 #### writeReadBlockTest()
 ```C
@@ -269,7 +281,10 @@ void writeReadBlockTest(uint24_t startingAddress)
     return;   
 }
 ```
-TODO: Write vs READ difference warning for data verification
+
+This test uses eepromWriteBlock() and eepromReadBlock() to write and read a generated array. A saved copy of the written data is used for comparing with the read data.
+
+Note: Due to eepromWriteBlock() wrapping around the EEPROM's memory pages and eepromReadBlock() continuing to the next page, the starting address of this test should be at the beginning of a page (any valid address  that ends with 0x00 should work, eg. 0x123400, 0x000100). Otherwise the address of the written data and read data will differ after the end of a page.
 
 #### main()
 ```C
@@ -292,14 +307,13 @@ int main(void)
 }
 ```
 
-TODO
+Peripherals are initialized, the EEPROM's "Hold" and "Write Protect" pins are set high to disable them, and the test functions are called.
 
 ## Operation
 
-<!-- Explain how to operate the example. Depending on complexity, step-by-step instructions and/or tables and/or images can be used -->
-The demonstration will automatically run on programming and output the results of it's own internal test out via UART and can be viewed in MPLAB Data Visualizer, or any terminal program configured for a baud rate of 115200. The user may include more detailed information about the exact details of the write and read process by defining DEBUG = 0b1 in the main.c file.
+The demonstration will automatically run on programming and output the results of it's own internal test out via UART and can be viewed in MPLAB Data Visualizer, or any terminal program configured for a baud rate of 115200. The user may include more detailed information about the exact details of the write and read process by including "#define DEBUG 0b1" in the main.c file.
 
-TODO: Include screenshot of Datavisualizer terminal with and without DEBUG defined
+![Data Visualizer](images/data_visualizer.png)
 
 ## Summary
 
