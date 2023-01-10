@@ -37,10 +37,12 @@ The PIC16F18076 curiosity nano development board is connected to the curiosity n
 
 ### Configuration Bits
 ![Configuration Bits](images/config_bits.png)
+
 Set External Oscillator Selection bits to "Oscillator Not Enabled" and "Reset Oscillator Selection bits" to "HFINTOSC (32 MHz)".
 
 ### Clock Control
 ![Clock Control](images/clock_control.png)
+
 Set the "Current Oscillator Source Select" to "HFINTOSC_32MHz" and the "HF Internal Clock" to "32_MHz".
 
 ### Pins
@@ -56,16 +58,20 @@ MSSP1 | SDO1 | RB0
 Pins | GPIO (output) | RB3/RD3/RD7
 
 ![Pin Grid View](images/pin_grid_view.png)
+
 In the "Pins" menu the user should rename pins RB3, RD3, and RD7 to "CS1", "HLD", and "WP" respectively for the function pin names to match the function of the corresponding pins. 
 ![Pins](images/pins.png)
+
 IMPORTANT NOTE: The user should also disable the Slew Rate for pins SPI Pins: SCK1, SDI1, SDO1 (RB2, RB1, RB0 respectively). Leaving the Slew Rate limit active on the MSSP SPI pins can cause issues with higher MSSP clock frequencies.
 
 ### SPI MSSP1
 ![MSSP SPI](images/mssp_spi.png)
+
 The MSSP SPI should be configured to "Host Mode" in "SPI Mode" should be set to "SPI Mode 0", with the input data sampled in the middle. The "Clock Source Selection" should be set to one of the "FOSC" setting, this example uses "FOSC/4" however "FOSC/16" and "FOSC/64" will work too.
 
 ### UART2
 ![UART](images/uart.png)
+
 The user may set whatever baud rate they choose. A baud rate of 115200 will be used for this example.
 Note: "Redirect Printf to UART" should be enabled for debugging and displaying test results for this demo, however is not necessary if the user only needs to write and read data to the external EEPROM.
 
