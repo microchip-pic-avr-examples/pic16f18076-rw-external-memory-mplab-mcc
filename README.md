@@ -4,7 +4,7 @@
 
 # How to Write and Read to an External EEPROM with a PIC16F18076
 
-This example will walk the user through how to read and write both a single byte and array of memory from a PIC16F18076 microcontroller on a curiosity nano development board to an external 25CSM04 EEPROM device on a Mikroe EEPROM 7 click board using MPLAB Code Configurator and the MSSP SPI peripheral. MCC will also be used to setup the microcontroller's pins and basic configurations while the UART peripheral will be configured for debugging and outputing the result of the example's included test of the write and read process.
+This example will explain how to read and write both a single byte and array of memory from a PIC16F18076 microcontroller to an external EEPROM device. A curiosity nano development board will be used with an external 25CSM04 EEPROM device on a Mikroe EEPROM 7 click board. Additionally, MPLAB Code Configurator with its MSSP SPI peripheral will be used to handle communication between the microcontroller and the EEPROM device. MCC will also be used to setup the microcontroller's pins and basic configurations and the UART peripheral will be configured for debugging and outputing the results of the example's included tests for reading and writing.
 
 ## Related Documentation
 
@@ -323,4 +323,4 @@ The demonstration will automatically run on programming and output the results o
 
 ## Summary
 
-This example demonstrate basic read and write functionality using a PIC16F18076 microcontroler and an external 25CSM04 EEPROM device on a Mikroe EEPROM 7 click board.
+This example demonstrates basic read and write functionality using a PIC16F18076 microcontroler and an external 25CSM04 EEPROM device on a Mikroe EEPROM 7 click board.
