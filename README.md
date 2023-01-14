@@ -4,41 +4,40 @@
 
 # How to Write and Read to an External EEPROM with a PIC16F18076
 
-This example will explain how to read and write both a single byte and array of memory from a PIC16F18076 microcontroller to an external EEPROM device. A curiosity nano development board will be used with an external 25CSM04 EEPROM device on a Mikroe EEPROM 7 click board. Additionally, MPLAB Code Configurator with its MSSP SPI peripheral will be used to handle communication between the microcontroller and the EEPROM device. MCC will also be used to setup the microcontroller's pins and basic configurations and the UART peripheral will be configured for debugging and outputing the results of the example's included tests for reading and writing.
+This example explains how to read and write both a single byte and an array of memory from a PIC16F18076 microcontroller (MCU) to an external EEPROM device. A Curiosity Nano development board is used with an external 25CSM04 EEPROM device on a Mikroe EEPROM 7 Click board™. Additionally, MPLAB® Code Configurator (MCC) with its Host Synchronous Serial Port (MSSP) Serial Peripheral Interface (SPI) peripheral is used to handle communication between the MCU and the EEPROM device. MCC is also used to set up the microcontroller’s pins and basic configurations, as well as to configure the Universal Asynchronous Receiver Transmitter (UART) peripheral for debugging and outputing the results of the reading and writing tests included in the example.
 
 ## Related Documentation
 
-- [PIC16F18076 Product Page and Datasheet](https://www.microchip.com/en-us/product/PIC16F18076?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
+- [PIC16F18076 Product Page and Data Sheet](https://www.microchip.com/en-us/product/PIC16F18076?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
 
 
-- [25CSM04 Product Page and Datasheet](https://www.microchip.com/en-us/product/25CSM04?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
+- [25CSM04 Product Page and Data Sheet](https://www.microchip.com/en-us/product/25CSM04?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
 
 ## Software Used
 
-- MPLAB® X IDE 6.0.5 or newer [(MPLAB® X IDE 6.0)](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic16f18076-read-write-external-memory-github)
-- MPLAB® XC8 2.40.0 or newer compiler [(MPLAB® XC8 2.40)](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic16f18076-read-write-external-memory-github)
-- MPLAB® Code Configurator (MCC) 5.2.2 or newer [(microchip.com/mplab/mplab-code-configurator)](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
-- MPLAB® Code Configurator (MCC) Device Libraries PIC10 / PIC12 / PIC16 / PIC18 MCUs [(microchip.com/mplab/mplab-code-configurator)](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
-- Microchip PIC16F1xxxx_DFP Series Device Support (1.15.191) or newer [(packs.download.microchip.com/)](https://packs.download.microchip.com/)
+- MPLAB® X IDE [6.0.5 or newer](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic16f18076-read-write-external-memory-github)
+- MPLAB XC8 [2.40.0 or newer](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic16f18076-read-write-external-memory-github)
+- MPLAB Code Configurator (MCC) [5.2.2 or newer](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
+- MPLAB Code Configurator (MCC) [Device Libraries](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc) PIC10 / PIC12 / PIC16 / PIC18 MCUs
+- Microchip PIC16F1xxxx_DFP Series Device Support [(1.15.191) or newer](https://packs.download.microchip.com/)
 
 ## Hardware Used
 
-     - [PIC16F18076 Curiosity Nano (EV53Z50A)](https://www.microchip.com/en-us/development-tool/EV53Z50A?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
-     - [Curiosity Nano Base for Click boards™](https://www.microchip.com/en-us/development-tool/AC164162?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
-     - [EEPROM 7 Click board™](https://www.mikroe.com/eeprom-7-click)
-     - Logic Analyzer such as Salae Logic 8™ or similar (Optional, but highly recommended for debugging)
+- [PIC16F18076 Curiosity Nano (EV53Z50A)](https://www.microchip.com/en-us/development-tool/EV53Z50A?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
+- [Curiosity Nano Base for Click boards](https://www.microchip.com/en-us/development-tool/AC164162?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
+- [EEPROM 7 Click board](https://www.mikroe.com/eeprom-7-click)
+- Logic Analyzer such as [Saleae Logic 8™](https://usd.saleae.com/products/saleae-logic-8)  or similar (optional, but highly recommended for debugging)
 
 ## Setup
 
 ### Hardware Setup
-The PIC16F18076 curiosity nano development board is connected to the curiosity nano base board with the Mikroe EEPROM 7 click board placed in mikro BUS 1.
-
+The PIC16F18076 Curiosity Nano development board is connected to the Curiosity Nano base board with the Mikroe EEPROM 7 Click board placed in mikroBUS™ 1.
 ### MPLAB Code Configurator Setup
 
 ### Configuration Bits
 ![Configuration Bits](images/config_bits.png)
 
-Set External Oscillator Selection bits to "Oscillator Not Enabled" and "Reset Oscillator Selection bits" to "HFINTOSC (32 MHz)".
+Set "External Oscillator Selection bits" to "Oscillator Not Enabled" and "Reset Oscillator Selection bits" to "HFINTOSC (32 MHz)".
 
 ### Clock Control
 ![Clock Control](images/clock_control.png)
@@ -46,7 +45,7 @@ Set External Oscillator Selection bits to "Oscillator Not Enabled" and "Reset Os
 Set the "Current Oscillator Source Select" to "HFINTOSC_32MHz" and the "HF Internal Clock" to "32_MHz".
 
 ### Pins
-Configure Pins to the table below:
+Configure pins to the table below:
 
 Module | Function | Pin
 --- | --- | ---
@@ -59,31 +58,32 @@ Pins | GPIO (output) | RB3/RD3/RD7
 
 ![Pin Grid View](images/pin_grid_view.png)
 
-In the "Pins" menu the user should rename pins RB3, RD3, and RD7 to "CS1", "HLD", and "WP" respectively for the function pin names to match the function of the corresponding pins. 
+In the **Pins** tab, rename pins RB3, RD3, and RD7 to "CS1", "HLD", and "WP" respectively, for the function pin names to match the function of the corresponding pins. 
 ![Pins](images/pins.png)
 
-IMPORTANT NOTE: The user should also disable the Slew Rate for pins SPI Pins: SCK1, SDI1, SDO1 (RB2, RB1, RB0 respectively). Leaving the Slew Rate limit active on the MSSP SPI pins can cause issues with higher MSSP clock frequencies.
+**IMPORTANT NOTE:** Disable the “Slew Rate” for SPI pins: SCK1, SDI1, SDO1 (RB2, RB1, RB0 respectively). Leaving the Slew Rate limit active on the MSSP SPI pins can cause issues with higher MSSP clock frequencies.
 
 ### SPI MSSP1
 ![MSSP SPI](images/mssp_spi.png)
 
-The MSSP SPI should be configured to "Host Mode" in "SPI Mode" should be set to "SPI Mode 0", with the input data sampled in the middle. The "Clock Source Selection" should be set to one of the "FOSC" setting, this example uses "FOSC/4" however "FOSC/16" and "FOSC/64" will work too.
+Configure the MSSP1 SPI to "Host Mode" and set "SPI Mode" to "SPI Mode 0", with the input data sampled in the middle. Set the "Clock Source Selection" to one of the "FOSC" settings. This example uses "FOSC/4", but "FOSC/16" and "FOSC/64" will work too.
 
 ### UART2
 ![UART](images/uart.png)
 
-The user may set whatever baud rate they choose. A baud rate of 115200 will be used for this example.
-Note: "Redirect Printf to UART" should be enabled for debugging and displaying test results for this demo, however is not necessary if the user only needs to write and read data to the external EEPROM.
+The user may set whatever baud rate they choose. A baud rate of 115200 is used for this example.
+
+**Note:** "Redirect Printf to UART" should be enabled for debugging and displaying test results for this demo, however is not necessary if the user only needs to write and read data to the external EEPROM.
 
 ### Application Code
 
-Note: For simplicity and readability, the EEPROM OPCODES are defined as shown below and will be identified by their defined names throughout the code. Additionally all printf debug statements have been removed from the code snippets displayed here.
+**Note:** For simplicity and readability, the EEPROM OPCODES are defined as shown below and will be identified by their defined names throughout the code. Additionally, all `printf` debug statements have been removed from the code snippets displayed here.
 
 ```C
 #define WRITE_OPCODE        0x02
 #define READ_OPCODE         0x03
 #define WRDI_OPCODE         0x04 //Reset Write Enable
-#define RDSR_OPCODE         0x05 //Read Status Register OPCODE
+#define RDSR_OPCODE         0x05 //Read STATUS Register OPCODE
 #define WRITE_ENABLE_OPCODE 0x06
 #define WRBP_OPCODE         0x08 //Write Ready/Busy Poll
 #define SRST_OPCODE         0x7C //Software device reset OPCODE
@@ -104,22 +104,22 @@ void eepromWriteEnable(void)
     return;
 }
 ```
-Before any write can be initiated with the 25CSM04 EEPROM a Write Enable Opcode must be sent over the SDO line to the device. This function sends that opcode then uses the eepromReadStatusRegister() function to check the EEPROM's Status Register for a successful write enable. This function is automatically called in both write functions in this demo.
+Before any write can be initiated with the 25CSM04 EEPROM, a Write Enable Opcode must be sent over the Serial Data Out (SDO) line to the device. This function sends that opcode, then uses the readStatusRegister() function to check the EEPROM STATUS register for a successful write enable. This function is automatically called in both write functions used for this demo.
 
-#### eepromReadStatusRegister()
+#### readStatusRegister()
 ```C
 uint16_t readStatusRegister(void)
 {
     uint16_t RDSR = 0x0000;
     CS1_SetLow();
-    SPI1_ByteExchange(RDSR_OPCODE); //Send Read Status Register OPCODE
+    SPI1_ByteExchange(RDSR_OPCODE); //Send Read STATUS Register OPCODE
     RDSR = (uint16_t)SPI1_ByteExchange(0xff); //Read back incoming RDSR Byte 0
     RDSR |= ((uint16_t)SPI1_ByteExchange(0xff)) << 8; // Read back incoming RDSR Byte 1
     CS1_SetHigh();    
     return RDSR;
 }
 ```
-This function sends the RDSR_OPCODE through the MSSP and returns the status register. It's polled automatically in eepromWriteEnable() to check for a successful "Write Enable" operation and polled after every "Write" operation for the completion of that operation. This instruction may be bypassed in favor of a 5ms delay between write operations, however polling the Status Register will always be either quicker or equal to the 5ms delay.  
+This function sends the RDSR_OPCODE through the MSSP and returns the status register. It's polled automatically in eepromWriteEnable() to check for a successful write enable operation and polled after every write operation for the completion of that operation. This instruction may be bypassed in favor of a 5 ms delay between write operations, however polling the STATUS register will always be either quicker or equal to the 5 ms delay.  
 
 #### eepromWriteByte()
 ```C
@@ -176,7 +176,7 @@ void eepromWriteBlock (uint24_t address, uint8_t *block,int blockSize)
     return; 
 }
 ```
- The eepromWriteBlock() function follows the same principle as eepromWriteByte(), however it writes multiple bytes. The user should be aware this EEPROM segments its memory into 256-byte pages, and a block of data larger than a page will not be written properly. When a block write command reaches the end of a page the address will wrap around to the beginning of a page, so any data written past 256 bytes in a single block write will overwrite the data written at the beginning of that write. If the user desires to send more than 256-bytes at once they should split the data into smaller blocks and use multiple write commands. 
+ The eepromWriteBlock() function follows the same principle as eepromWriteByte(), but writes multiple bytes. Note that this EEPROM segments its memory into 256-byte pages, and a block of data larger than a page will not be written properly. When a block write command reaches the end of a page, the address will wrap around to the beginning of a page, so any data written past 256 bytes in a single block write will overwrite the data written at the beginning of that write. If more than 256-bytes need to be sent at once, the user can split the data into smaller blocks and use multiple write commands.
 
 #### eepromReadByte()
 ```C
@@ -197,7 +197,7 @@ uint8_t eepromReadByte (uint24_t address)
     return data;
 }
 ```
-The eepromReadByte() function fills an array with the READ_OPCODE and specified address then uses SPI1_BufferExchange() to read the data located at the specified address on the external EEPROM.
+The eepromReadByte() function fills an array with the READ_OPCODE and specified address, then uses SPI1_BufferExchange() to read the data located at the specified address on the external EEPROM.
 
 #### eepromReadBlock()
 ```C
@@ -216,7 +216,7 @@ void eepromReadBlock(uint24_t startingAddress, uint8_t *block, int blockSize)
     return;
 }
 ```
-The eepromReadBlock() function functions just like eepromReadByte(), however reads a specified number of bytes and then stores the returned values at the address for variable "block". Unlike eepromWriteBlock(), a single block read command can continue past the end of a page and read the entire EEPROM if desired. The function will start at the address specified by "startingAddress" and increment upwards with each subsequent clock cycle.
+The eepromReadBlock() functions just like eepromReadByte(), but reads a specified number of bytes and then stores the returned values at the address for variable “block”. Unlike eepromWriteBlock(), a single block read command can continue past the end of a page and read the entire EEPROM, if desired. The function will start at the address specified by “startingAddress” and increment upwards with each subsequent clock cycle.
 
 #### writeReadByteTest()
 ```C
@@ -290,7 +290,7 @@ void writeReadBlockTest(uint24_t startingAddress)
 
 This test uses eepromWriteBlock() and eepromReadBlock() to write and read a generated array. A saved copy of the written data is used for comparing with the read data.
 
-Note: Due to eepromWriteBlock() wrapping around the EEPROM's memory pages and eepromReadBlock() continuing to the next page, the starting address of this test should be at the beginning of a page (any valid address  that ends with 0x00 should work, eg. 0x123400, 0x000100). Otherwise the address of the written data and read data will differ after the end of a page.
+**Note:** Due to eepromWriteBlock() wrapping around the EEPROM's memory pages and eepromReadBlock() continuing to the next page, the starting address of this test needs to be at the beginning of a page. Any valid address that ends with 0x00 is appropriate (e.g., 0x123400, 0x000100). Otherwise, the address of the written data and read data will differ after the end of a page.
 
 #### main()
 ```C
@@ -323,4 +323,4 @@ The demonstration will automatically run on programming and output the results o
 
 ## Summary
 
-This example demonstrates basic read and write functionality using a PIC16F18076 microcontroler and an external 25CSM04 EEPROM device on a Mikroe EEPROM 7 click board.
+This example demonstrates basic read and write functionality using a PIC16F18076 microcontroler and an external 25CSM04 EEPROM device on a Mikroe EEPROM 7 Click board.
