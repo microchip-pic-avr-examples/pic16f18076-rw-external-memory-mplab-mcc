@@ -15,7 +15,7 @@ This example explains how to read and write both a single byte and an array of m
 
 ## Software Used
 
-- MPLAB® X IDE [6.0.5 or newer](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic16f18076-read-write-external-memory-github)
+- MPLAB X IDE [6.0.5 or newer](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic16f18076-read-write-external-memory-github)
 - MPLAB XC8 [2.40.0 or newer](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic16f18076-read-write-external-memory-github)
 - MPLAB Code Configurator (MCC) [5.2.2 or newer](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
 - MPLAB Code Configurator (MCC) [Device Libraries](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc) PIC10 / PIC12 / PIC16 / PIC18 MCUs
@@ -317,7 +317,7 @@ Peripherals are initialized, the EEPROM's "Hold" and "Write Protect" pins are se
 
 ## Operation
 
-The demonstration will automatically run on programming and output the results of it's own internal test out via UART and can be viewed in MPLAB Data Visualizer, or any terminal program configured for a baud rate of 115200. The user may include more detailed information about the exact details of the write and read process by including "#define DEBUG 0b1" in the main.c file.
+The demonstration automatically runs the programming and outputs the results of its own internal test via UART. This can be viewed in MPLAB Data Visualizer, or any terminal program configured for a baud rate of 115200. The user may include more information about the exact details of the write and read process by including `#define DEBUG 0b1` in the `main.c` file.
 
 ![Data Visualizer](images/data_visualizer.png)
 
