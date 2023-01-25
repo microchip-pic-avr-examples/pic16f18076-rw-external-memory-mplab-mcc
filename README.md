@@ -18,7 +18,7 @@ This example explains how to read and write both a single byte and an array of m
 - MPLAB X IDE [6.0.5 or newer](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic16f18076-read-write-external-memory-github)
 - MPLAB XC8 [2.40.0 or newer](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic16f18076-read-write-external-memory-github)
 - MPLAB Code Configurator (MCC) [5.2.2 or newer](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
-- MPLAB Code Configurator (MCC) [Device Libraries](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc) PIC10 / PIC12 / PIC16 / PIC18 MCUs
+- MPLAB Code Configurator (MCC) [Device Libraries](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc) PIC10/PIC12/PIC16/PIC18 MCUs
 - Microchip PIC16F1xxxx_DFP Series Device Support [(1.15.191) or newer](https://packs.download.microchip.com/)
 
 ## Hardware Used
@@ -104,7 +104,7 @@ void eepromWriteEnable(void)
     return;
 }
 ```
-Before any write can be initiated with the 25CSM04 EEPROM, the write operation must be enabled. This is done in a two step process where first a Write Enable Opcode must be sent over the Serial Data Out (SDO) line to the device, then the EEPROM's status register is checked to ensure the write enable command has executed successfully. This function sends that opcode, then uses the readStatusRegister() function shown below to check the EEPROM STATUS register for a successful write enable operation. This function is automatically called in both write functions used for this demo.
+Before any write can be initiated with the 25CSM04 EEPROM, the write operation must be enabled. This is done in a two-step process where first a Write Enable Opcode must be sent over the Serial Data Out (SDO) line to the device, then the EEPROM's status register is checked to ensure the write enable command has executed successfully. This function sends that opcode, then uses the readStatusRegister() function shown below to check the EEPROM STATUS register for a successful write enable operation. This function is automatically called in both write functions used for this demo.
 
 #### readStatusRegister()
 ```C
@@ -119,7 +119,7 @@ uint16_t readStatusRegister(void)
     return RDSR;
 }
 ```
-The STATUS register in the EEPROM device is used to check the status after a write enable command and after any write. This function sends the RDSR_OPCODE through the MSSP and returns the STATUS register. It's polled automatically in eepromWriteEnable() to check for a successful write enable operation and polled after every write operation for the completion of that operation. This instruction may be bypassed in favor of a 5 ms delay between write operations, however polling the STATUS register will always be either quicker or approximately equal in time to the 5 ms delay.  
+The STATUS register in the EEPROM device is automatically polled after a write enable command and after any write. This function sends the RDSR_OPCODE through the MSSP and returns the STATUS register. It's polled automatically in eepromWriteEnable() to check for a successful write enable operation and polled after every write operation for the completion of that operation. This instruction may be bypassed in favor of a 5 ms delay between write operations, however polling the STATUS register will always be either quicker or approximately equal in time to the 5 ms delay.  
 
 #### eepromWriteByte()
 ```C
@@ -146,7 +146,7 @@ void eepromWriteByte (uint24_t address, uint8_t data)
 ```
 ![Write Diagram](images/WriteDiagram.png)
 
-The eepromWriteByte() function takes the desired address and data from the user and writes that data to that address. This function starts by internally calling eepromWriteEnable() at the beginning. Then it fills an array with the WRITE_OPCODE, the EEPROM address, and finally the desired byte of data. The SPI1_BufferExchange() is then used to transfer the data, and lastly readStatusRegister is used to check for the write command's completion. An excerpt from the 25CSM04's datasheet has been included below to show the order of this data transfer.
+The eepromWriteByte() function takes the desired address and data from the user and writes that data to that address. This function starts by internally calling eepromWriteEnable() at the beginning. Then it fills an array with the WRITE_OPCODE, the EEPROM address, and finally the desired byte of data. The SPI1_BufferExchange() is then used to transfer the data, and lastly readStatusRegister is used to check for the write command's completion. An excerpt from the [25CSM04](https://www.microchip.com/en-us/product/25CSM04?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)'s datasheet has been included below for the completion of the write command.
 
 ![BYTE WRITE SEQUENCE](images/BYTE_WRITE_SEQUENCE.png)
 
@@ -178,7 +178,7 @@ void eepromWriteBlock (uint24_t address, uint8_t *block,int blockSize)
     return; 
 }
 ```
- The eepromWriteBlock() function follows the same principle as eepromWriteByte(), but writes multiple bytes. Note that this EEPROM segments its memory into 256-byte pages, and a block of data larger than a page will not be written properly. When a block write command reaches the end of a page, the address will wrap around to the beginning of a page, so any data written past 256 bytes in a single block write will overwrite the data written at the beginning of that write. If more than 256-bytes need to be sent at once, the user can split the data into smaller blocks and use multiple write commands. 
+ The eepromWriteBlock() function follows the same principle as eepromWriteByte(), but writes multiple bytes. Note that this EEPROM segments its memory into 256-byte pages, thus a block of data larger than a page will not be written properly. When a block write command reaches the end of a page, the address will wrap around to the beginning of a page, so any data written past 256 bytes in a single block write will overwrite the data written at the beginning of that write. If more than 256-bytes need to be sent at once, the user can split the data into smaller blocks and use multiple write commands. 
 
 #### eepromReadByte()
 ```C
@@ -292,7 +292,7 @@ void writeReadBlockTest(uint24_t startingAddress)
 
 This test uses eepromWriteBlock() and eepromReadBlock() to write and read a generated array. A saved copy of the written data is used for comparing with the read data.
 
-**Note:** Due to eepromWriteBlock() wrapping around the EEPROM's memory pages and eepromReadBlock() continuing to the next page, the starting address of this test needs to be at the beginning of a page. Any valid address that ends with 0x00 is appropriate (e.g., 0x123400, 0x000100). Otherwise, the address of the written data and read data will differ after the end of a page.
+**Note:** Due to eepromWriteBlock() wrapping around the EEPROM memory pages and eepromReadBlock() continuing to the next page, the starting address of this test needs to be at the beginning of a page. Any valid address that ends with 0x00 is appropriate (e.g., 0x123400, 0x000100). Otherwise, the address of the written data and read data will differ after the end of a page.
 
 #### main()
 ```C
