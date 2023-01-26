@@ -18,7 +18,6 @@ This example explains how to read and write both a single byte and an array of m
 - MPLAB X IDE [6.0.5 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
 - MPLAB XC8 [2.40.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
 - MPLAB Code Configurator (MCC) [5.2.2 or newer](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
-- MPLAB Code Configurator (MCC) [Device Libraries](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc) PIC10/PIC12/PIC16/PIC18 MCUs
 - Microchip PIC16F1xxxx_DFP Series Device Support [(1.15.191) or newer](https://packs.download.microchip.com/)
 
 ## Hardware Used
@@ -34,17 +33,17 @@ This example explains how to read and write both a single byte and an array of m
 The PIC16F18076 Curiosity Nano development board is connected to the Curiosity Nano base board with the Mikroe EEPROM 7 Click board placed in mikroBUS™ 1.
 ### MPLAB Code Configurator Setup
 
-### Configuration Bits
+#### Configuration Bits
 ![Configuration Bits](images/config_bits.png)
 
 Set "External Oscillator Selection bits" to "Oscillator Not Enabled" and "Reset Oscillator Selection bits" to "HFINTOSC (32 MHz)".
 
-### Clock Control
+#### Clock Control
 ![Clock Control](images/clock_control.png)
 
 Set the "Current Oscillator Source Select" to "HFINTOSC_32MHz" and the "HF Internal Clock" to "32_MHz".
 
-### Pins
+#### Pins
 Configure pins to the table below:
 
 Module | Function | Pin
@@ -64,12 +63,12 @@ In the **Pins** tab, rename pins RB3, RD3, and RD7 to "CS1", "HLD", and "WP" res
 
 **IMPORTANT NOTE:** Disable the “Slew Rate” for SPI pins: SCK1, SDI1, SDO1 (RB2, RB1, RB0 respectively). Leaving the Slew Rate limit active on the MSSP SPI pins can cause issues with higher MSSP clock frequencies.
 
-### SPI MSSP1
+#### SPI MSSP1
 ![MSSP SPI](images/mssp_spi.png)
 
 Configure the MSSP1 SPI to "Host Mode" and set "SPI Mode" to "SPI Mode 0", with the input data sampled in the middle. Set the "Clock Source Selection" to one of the "FOSC" settings. This example uses "FOSC/4", but "FOSC/16" and "FOSC/64" will work too.
 
-### UART2
+#### UART2
 ![UART](images/uart.png)
 
 The user may set whatever baud rate they choose. A baud rate of 115200 is used for this example.
