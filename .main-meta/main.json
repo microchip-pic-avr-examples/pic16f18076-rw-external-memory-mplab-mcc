@@ -36,7 +36,7 @@
                 "versionRange": "*"
             }
         },
-        "author": "Microchip",
+        "author": "Nathaniel Thompson",
         "peripherals": [
             "MSSP",
             "SPI",
