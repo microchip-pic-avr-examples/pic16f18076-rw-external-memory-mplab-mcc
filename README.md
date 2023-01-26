@@ -15,8 +15,8 @@ This example explains how to read and write both a single byte and an array of m
 
 ## Software Used
 
-- MPLAB X IDE [6.0.5 or newer](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic16f18076-read-write-external-memory-github)
-- MPLAB XC8 [2.40.0 or newer](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic16f18076-read-write-external-memory-github)
+- MPLAB X IDE [6.0.5 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
+- MPLAB XC8 [2.40.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
 - MPLAB Code Configurator (MCC) [5.2.2 or newer](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
 - MPLAB Code Configurator (MCC) [Device Libraries](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc) PIC10/PIC12/PIC16/PIC18 MCUs
 - Microchip PIC16F1xxxx_DFP Series Device Support [(1.15.191) or newer](https://packs.download.microchip.com/)
@@ -26,7 +26,7 @@ This example explains how to read and write both a single byte and an array of m
 - [PIC16F18076 Curiosity Nano (EV53Z50A)](https://www.microchip.com/en-us/development-tool/EV53Z50A?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
 - [Curiosity Nano Base for Click boards](https://www.microchip.com/en-us/development-tool/AC164162?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic16f18076&utm_content=pic16f18076-eeprom-demo-mplab-mcc)
 - [EEPROM 7 Click board](https://www.mikroe.com/eeprom-7-click)
-- Logic Analyzer such as [Saleae Logic 8™](https://usd.saleae.com/products/saleae-logic-8)  or similar (optional, but highly recommended for debugging)
+- Logic Analyzer
 
 ## Setup
 
@@ -56,10 +56,11 @@ MSSP1 | SDI1 | RB1
 MSSP1 | SDO1 | RB0
 Pins | GPIO (output) | RB3/RD3/RD7
 
-![Pin Grid View](images/pin_grid_view.png)
+![Pin Grid View](images/pin_grid_view.png)  
 
-In the **Pins** tab, rename pins RB3, RD3, and RD7 to "CS1", "HLD", and "WP" respectively, for the function pin names to match the function of the corresponding pins. 
-![Pins](images/pins.png)
+In the **Pins** tab, rename pins RB3, RD3, and RD7 to "CS1", "HLD", and "WP" respectively, for the function pin names to match the function of the corresponding pins.  
+
+![Pins](images/pins.png)  
 
 **IMPORTANT NOTE:** Disable the “Slew Rate” for SPI pins: SCK1, SDI1, SDO1 (RB2, RB1, RB0 respectively). Leaving the Slew Rate limit active on the MSSP SPI pins can cause issues with higher MSSP clock frequencies.
 
